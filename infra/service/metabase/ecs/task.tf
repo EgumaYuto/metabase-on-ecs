@@ -32,7 +32,7 @@ resource "aws_ecs_task_definition" "definition" {
   task_role_arn      = aws_iam_role.task_role.arn
 
   cpu                      = "512"
-  memory                   = "1024"
+  memory                   = "4096"
   requires_compatibilities = ["FARGATE"]
 
   container_definitions = <<EOF
@@ -40,9 +40,18 @@ resource "aws_ecs_task_definition" "definition" {
   {
     "image": "metabase/metabase:latest",
     "cpu": 512,
-    "memory": 1024,
+    "memory": 4096,
     "networkMode": "awsvpc",
+    "essential": true,
     "name": "${module.naming.name}",
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "${aws_cloudwatch_log_group.log_group.name}",
+        "awslogs-region": "ap-northeast-1",
+        "awslogs-stream-prefix": "ecs"
+      }
+    },
     "portMappings": [
       {
         "containerPort": 3000,

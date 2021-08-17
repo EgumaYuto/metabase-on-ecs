@@ -8,12 +8,12 @@ data "terraform_remote_state" "vpc" {
   }
 }
 
-data "terraform_remote_state" "private_subnet" {
+data "terraform_remote_state" "public_subnet" {
   backend = "s3"
 
   config = {
     bucket = var.state_bucket
-    key    = "env:/${terraform.workspace}/state/platform/network/subnet/private.tfstate"
+    key    = "env:/${terraform.workspace}/state/platform/network/subnet/public.tfstate"
     region = var.default_region
   }
 }

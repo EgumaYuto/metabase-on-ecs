@@ -26,10 +26,6 @@ resource "aws_ecs_service" "service" {
     container_port   = 3000
   }
 
-  deployment_controller {
-    type = "CODE_DEPLOY"
-  }
-
   network_configuration {
     subnets          = local.subnet_ids
     security_groups  = [aws_security_group.security_group.id]
