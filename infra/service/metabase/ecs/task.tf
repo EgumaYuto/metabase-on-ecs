@@ -54,12 +54,16 @@ resource "aws_ecs_task_definition" "definition" {
     },
     "environment": [
       {
+        "name": "MB_JETTY_HOST",
+        "value": "0.0.0.0"
+      },
+      {
         "name": "MB_DB_DBNAME",
         "value": "metabase"
       },
       {
         "name": "MB_DB_HOST",
-        "value": "dev-redshift-cluster.cxqnlpherdvd.ap-northeast-1.redshift.amazonaws.com"
+        "value": "dev-metabase-db-cluster.cluster-cfjmgu5o7qn7.ap-northeast-1.rds.amazonaws.com"
       },
       {
         "name": "MB_DB_PASS",
@@ -67,7 +71,7 @@ resource "aws_ecs_task_definition" "definition" {
       },
       {
         "name": "MB_DB_PORT",
-        "value": "5439"
+        "value": "5432"
       },
       {
         "name": "MB_DB_TYPE",
@@ -81,7 +85,8 @@ resource "aws_ecs_task_definition" "definition" {
     "portMappings": [
       {
         "containerPort": 3000,
-        "protocol": "tcp"
+        "protocol": "tcp",
+        "containerPort": 3000
       }
     ]
   }
