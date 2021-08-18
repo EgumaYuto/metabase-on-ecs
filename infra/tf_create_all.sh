@@ -11,3 +11,4 @@ TF_ARGS=${@:3}
 
 ./tf.sh $TF_CMD $ENV service/metabase/elb $TF_ARGS
 ./tf.sh $TF_CMD $ENV service/metabase/ecs $TF_ARGS
+./tf.sh $TF_CMD $ENV service/redshift $TF_ARGS

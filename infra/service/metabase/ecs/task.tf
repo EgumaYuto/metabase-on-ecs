@@ -52,6 +52,32 @@ resource "aws_ecs_task_definition" "definition" {
         "awslogs-stream-prefix": "ecs"
       }
     },
+    "environment": [
+      {
+        "name": "MB_DB_DBNAME",
+        "value": "example"
+      },
+      {
+        "name": "MB_DB_HOST",
+        "value": "example-cluster.cxqnlpherdvd.ap-northeast-1.redshift.amazonaws.com"
+      },
+      {
+        "name": "MB_DB_PASS",
+        "value": "SuperSecr3t"
+      },
+      {
+        "name": "MB_DB_PORT",
+        "value": "5439"
+      },
+      {
+        "name": "MB_DB_TYPE",
+        "value": "postgres"
+      },
+      {
+        "name": "MB_DB_USER",
+        "value": "exampleuser"
+      }
+    ],
     "portMappings": [
       {
         "containerPort": 3000,
