@@ -55,11 +55,11 @@ resource "aws_ecs_task_definition" "definition" {
     "environment": [
       {
         "name": "MB_DB_DBNAME",
-        "value": "example"
+        "value": "metabase"
       },
       {
         "name": "MB_DB_HOST",
-        "value": "example-cluster.cxqnlpherdvd.ap-northeast-1.redshift.amazonaws.com"
+        "value": "dev-redshift-cluster.cxqnlpherdvd.ap-northeast-1.redshift.amazonaws.com"
       },
       {
         "name": "MB_DB_PASS",
@@ -75,7 +75,7 @@ resource "aws_ecs_task_definition" "definition" {
       },
       {
         "name": "MB_DB_USER",
-        "value": "exampleuser"
+        "value": "metabase"
       }
     ],
     "portMappings": [
