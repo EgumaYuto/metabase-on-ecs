@@ -6,10 +6,10 @@ TF_ARGS=${@:3}
 
 ./tf.sh $TF_CMD $ENV devops/bastion $TF_ARGS
 
-./tf.sh $TF_CMD $ENV service/rds $TF_ARGS
 ./tf.sh $TF_CMD $ENV service/metabase/ecs $TF_ARGS
 ./tf.sh $TF_CMD $ENV service/metabase/elb $TF_ARGS
 
+./tf.sh $TF_CMD $ENV platform/data/rds $TF_ARGS
 ./tf.sh $TF_CMD $ENV platform/ecs-cluster $TF_ARGS
 ./tf.sh $TF_CMD $ENV platform/network/subnet/private $TF_ARGS
 ./tf.sh $TF_CMD $ENV platform/network/subnet/public $TF_ARGS

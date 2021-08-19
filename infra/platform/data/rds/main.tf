@@ -8,7 +8,7 @@ provider "aws" {
 }
 
 module "naming" {
-  source = "../../_module/naming"
+  source = "../../../_module/naming"
   role   = local.role
 }
 
