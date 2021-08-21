@@ -6,5 +6,5 @@ locals {
     id   = data.terraform_remote_state.public_dns.outputs.zone.id
     name = data.terraform_remote_state.public_dns.outputs.zone.name
   }
-  certificate_arn = data.terraform_remote_state.public_dns.outputs.acm.arn
+  certificate_arn = data.terraform_remote_state.public_dns.outputs.acm_apn1.arn
 }

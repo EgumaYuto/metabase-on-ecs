@@ -1,5 +1,5 @@
 resource "aws_acm_certificate" "apn1" {
-  domain_name       = aws_route53_zone.public.name
+  domain_name       = "*.${aws_route53_zone.public.name}"
   validation_method = "DNS"
 
   lifecycle {
