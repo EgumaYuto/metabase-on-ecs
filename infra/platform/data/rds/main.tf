@@ -27,8 +27,8 @@ resource "aws_security_group" "group" {
 
 
 resource "aws_db_subnet_group" "subnet_group" {
-  name        = "${module.naming.name}-subnet-group"
-  subnet_ids  = local.subnet_ids
+  name       = "${module.naming.name}-subnet-group"
+  subnet_ids = local.subnet_ids
   tags = {
     Name = "${module.naming.name}-subnet-group"
   }
