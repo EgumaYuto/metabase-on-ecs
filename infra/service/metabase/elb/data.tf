@@ -17,3 +17,13 @@ data "terraform_remote_state" "public_subnet" {
     region = var.default_region
   }
 }
+
+data "terraform_remote_state" "public_dns" {
+  backend = "s3"
+
+  config = {
+    bucket = var.state_bucket
+    key    = "env:/${terraform.workspace}/state/platform/route53/public.tfstate"
+    region = var.default_region
+  }
+}
