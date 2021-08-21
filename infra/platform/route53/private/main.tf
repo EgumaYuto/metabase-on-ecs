@@ -1,3 +1,12 @@
+terraform {
+  backend "s3" {
+  }
+}
+
+provider "aws" {
+  region = var.default_region
+}
+
 resource "aws_route53_zone" "private" {
   name = local.domain
 

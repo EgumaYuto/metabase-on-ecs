@@ -18,8 +18,8 @@ resource "aws_security_group" "group" {
   description = "rds cluster"
 
   ingress {
-    from_port   = 5432
-    to_port     = 5432
+    from_port   = local.database.port
+    to_port     = local.database.port
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -38,7 +38,7 @@ resource "aws_rds_cluster" "postgresql" {
   cluster_identifier      = "${module.naming.name}-cluster"
   engine                  = "aurora-postgresql"
   engine_version          = "11.9"
-  port                    = 5432
+  port                    = local.database.port
   availability_zones      = var.default_availability_zones
   database_name           = local.database.name
   master_username         = local.database.master.username

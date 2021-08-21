@@ -63,7 +63,7 @@ resource "aws_ecs_task_definition" "definition" {
       },
       {
         "name": "MB_DB_HOST",
-        "value": "dev-metabase-db-cluster.cluster-cfjmgu5o7qn7.ap-northeast-1.rds.amazonaws.com"
+        "value": "${local.rds_endpoint}"
       },
       {
         "name": "MB_DB_PASS",

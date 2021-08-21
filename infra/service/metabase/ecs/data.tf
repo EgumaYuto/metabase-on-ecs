@@ -28,6 +28,16 @@ data "terraform_remote_state" "main_cluster" {
   }
 }
 
+data "terraform_remote_state" "rds" {
+  backend = "s3"
+
+  config = {
+    bucket = var.state_bucket
+    key    = "env:/${terraform.workspace}/state/platform/data/rds.tfstate"
+    region = var.default_region
+  }
+}
+
 data "terraform_remote_state" "elb" {
   backend = "s3"
 
