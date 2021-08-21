@@ -6,7 +6,8 @@ resource "aws_flow_log" "log" {
 }
 
 resource "aws_cloudwatch_log_group" "flow_log_group" {
-  name = local.flow_log_group
+  name              = local.flow_log_group
+  retention_in_days = 3
 }
 
 data "aws_iam_policy_document" "flow_log_assume_policy" {
