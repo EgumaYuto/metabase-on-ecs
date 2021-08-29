@@ -6,6 +6,7 @@ TF_ARGS=${@:3}
 
 ./tf.sh $TF_CMD $ENV devops/bastion $TF_ARGS
 
+./tf.sh $TF_CMD $ENV service/scheduler $TF_ARGS
 ./tf.sh $TF_CMD $ENV service/metabase/ecs $TF_ARGS
 ./tf.sh $TF_CMD $ENV service/metabase/elb $TF_ARGS
 
