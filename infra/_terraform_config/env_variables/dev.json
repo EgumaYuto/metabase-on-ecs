@@ -4,6 +4,6 @@
   "primary_env": true,
   "state_bucket": "metabese-on-ecs-tfstate",
   "default_region": "ap-northeast-1",
-  "default_availability_zones": ["ap-northeast-1a", "ap-northeast-1c", "ap-northeast-1d"],
+  "default_availability_zones": ["ap-northeast-1a", "ap-northeast-1c"],
   "main_vpc_cidr_block": "10.0.0.0/16"
 }
