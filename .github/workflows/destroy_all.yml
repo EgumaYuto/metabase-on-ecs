@@ -1,4 +1,4 @@
-name: Terraform create all
+name: Terraform destroy all
 
 on: workflow_dispatch
 
