@@ -23,7 +23,7 @@ jobs:
           role-session-name: assume
 
       - name: All Apply
-        working-deirectory: ./infra
+        working-directory: ./infra
         run: |
           ./tf_create_all.sh init dev
           ./tf_create_all.sh apply dev -auto-approve
