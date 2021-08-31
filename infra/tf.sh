@@ -12,7 +12,6 @@ ENV_CONFIG=$(cat "$BASE_DIR/_terraform_config/env_variables/$ENV.json")
 cd $BASE_DIR/$TARGET_DIR
 
 if [[ ${TF_CMD} != 'init' ]]; then
-  terraform providers lock -platform=darwin_amd64 -platform=linux_amd64
   TF_VAR_primary_env=$(echo $ENV_CONFIG | jq -r ".primary_env") \
   TF_VAR_state_bucket=$(echo $ENV_CONFIG | jq -r ".state_bucket") \
   TF_VAR_default_region=$(echo $ENV_CONFIG | jq -r ".default_region") \
@@ -20,6 +19,7 @@ if [[ ${TF_CMD} != 'init' ]]; then
   TF_VAR_main_vpc_cidr_block=$(echo $ENV_CONFIG | jq -r ".main_vpc_cidr_block") \
   terraform $1 $TF_ARGS
 else
+  terraform providers lock -platform=darwin_amd64 -platform=linux_amd64
   terraform init \
     -backend-config "key=state/$(echo ${TARGET_DIR} | sed "s/\/$//").tfstate" \
     -backend-config "bucket=$(echo $ENV_CONFIG | jq -r ".state_bucket")" \
