@@ -23,5 +23,5 @@ jobs:
       - name: All Destroy
         working-directory: ./infra
         run: |
-          ./tf_create_all.sh init dev
+          ./tf_destroy_all.sh init dev
           ./tf_destroy_all.sh destroy dev -auto-approve
