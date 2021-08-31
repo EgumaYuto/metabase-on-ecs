@@ -20,7 +20,7 @@ jobs:
           role-duration-seconds: 3600
           role-session-name: assume
 
-      - name: All Apply
+      - name: All Destroy
         working-directory: ./infra
         run: |
           ./tf_create_all.sh init dev
