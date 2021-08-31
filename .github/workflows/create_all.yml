@@ -21,3 +21,9 @@ jobs:
           role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
           role-duration-seconds: 1200
           role-session-name: assume
+
+      - name: All Apply
+        working-deirectory: ./infra
+        run: |
+          ./tf_create_all.sh init dev
+          ./tf_create_all.sh apply dev -auto-approve
