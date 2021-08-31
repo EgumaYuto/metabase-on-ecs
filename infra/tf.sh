@@ -12,6 +12,7 @@ ENV_CONFIG=$(cat "$BASE_DIR/_terraform_config/env_variables/$ENV.json")
 cd $BASE_DIR/$TARGET_DIR
 
 if [[ ${TF_CMD} != 'init' ]]; then
+  terraform providers lock -platform=darwin_amd64 -platform=linux_amd64
   TF_VAR_primary_env=$(echo $ENV_CONFIG | jq -r ".primary_env") \
   TF_VAR_state_bucket=$(echo $ENV_CONFIG | jq -r ".state_bucket") \
   TF_VAR_default_region=$(echo $ENV_CONFIG | jq -r ".default_region") \
