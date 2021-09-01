@@ -25,6 +25,12 @@ resource "aws_alb_target_group" "target_group" {
   protocol    = "HTTP"
   port        = 3000
   target_type = "ip"
+
+  health_check {
+    enabled  = true
+    interval = 60
+    timeout  = 30
+  }
 }
 
 resource "aws_alb_listener" "http" {
