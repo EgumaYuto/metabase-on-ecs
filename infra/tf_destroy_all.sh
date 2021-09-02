@@ -12,6 +12,7 @@ TF_ARGS=${@:3}
 ./tf.sh $TF_CMD $ENV service/metabase/elb $TF_ARGS
 
 ./tf.sh $TF_CMD $ENV platform/data/rds $TF_ARGS
+./tf.sh $TF_CMD $ENV platform/parameters/rds $TF_ARGS
 ./tf.sh $TF_CMD $ENV platform/ecs-cluster $TF_ARGS
 ./tf.sh $TF_CMD $ENV platform/route53/private $TF_ARGS
 ./tf.sh $TF_CMD $ENV platform/route53/public $TF_ARGS

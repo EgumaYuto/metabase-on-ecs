@@ -27,3 +27,17 @@ data "terraform_remote_state" "private_dns" {
     region = var.default_region
   }
 }
+
+data "terraform_remote_state" "rds_parameters" {
+  backend = "s3"
+
+  config = {
+    bucket = var.state_bucket
+    key    = "env:/${terraform.workspace}/state/platform/parameters/rds.tfstate"
+    region = var.default_region
+  }
+}
+
+data "aws_ssm_parameter" "password" {
+  name = data.terraform_remote_state.rds_parameters.outputs.password.name
+}

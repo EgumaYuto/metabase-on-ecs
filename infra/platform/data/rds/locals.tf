@@ -5,7 +5,7 @@ locals {
     port = 5432
     master = {
       username = "metabase"
-      password = "SuperSecr3t" // TODO ssm から引っ張ってくるようにする
+      password = data.aws_ssm_parameter.password.value
     }
   }
   vpc_id     = data.terraform_remote_state.vpc.outputs.id
