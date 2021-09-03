@@ -1,0 +1,19 @@
+name: Terraform format check
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  format-check:
+    runs-on: ubuntu-latest
+    environment:
+      name: dev
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Terraform Format
+        working-directory: ./infra
+        id: fmt
+        run: terraform fmt -check -recursive
