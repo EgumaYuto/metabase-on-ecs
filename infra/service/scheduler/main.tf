@@ -16,6 +16,26 @@ resource "aws_glue_catalog_database" "database" {
   name = module.naming.name
 }
 
+resource "aws_security_group" "security_group" {
+  name        = module.naming.name
+  description = module.naming.name
+  vpc_id      = local.vpc_id
+
+  ingress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
 resource "aws_glue_connection" "connection" {
   name = module.naming.name
   connection_properties = {
@@ -27,6 +47,6 @@ resource "aws_glue_connection" "connection" {
   physical_connection_requirements {
     availability_zone      = var.default_availability_zones[0] // TODO たまたま揃っているだけなので、明示的に揃える
     subnet_id              = local.subnet_id
-    security_group_id_list = ["sg-0c2f123c3a4c13503"] // TODO デフォルトなので、自前ちゃんと自前で準備する
+    security_group_id_list = [aws_security_group.security_group.id]
   }
 }
