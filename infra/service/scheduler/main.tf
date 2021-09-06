@@ -38,6 +38,7 @@ resource "aws_security_group" "security_group" {
 
 resource "aws_glue_connection" "connection" {
   name = module.naming.name
+
   connection_properties = {
     JDBC_CONNECTION_URL = "jdbc:postgresql://${local.rds.writer}:${local.rds.port}/metabase"
     PASSWORD            = local.rds.password
