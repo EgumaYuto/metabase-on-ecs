@@ -20,7 +20,7 @@ resource "aws_ssm_parameter" "password" {
 }
 
 resource "random_string" "password" {
-  length           = 16
-  special          = false
+  length  = 16
+  special = false
 }
 
