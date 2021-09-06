@@ -17,10 +17,6 @@ resource "aws_ssm_parameter" "password" {
   name  = module.password.name
   type  = "SecureString"
   value = random_string.password.result
-
-  lifecycle {
-    ignore_changes = [value]
-  }
 }
 
 resource "random_string" "password" {
