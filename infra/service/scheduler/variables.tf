@@ -7,3 +7,8 @@ variable "default_region" {
   type        = string
   description = "デフォルトのリージョン"
 }
+
+variable "default_availability_zones" {
+  type        = list(string)
+  description = "デフォルトのアベイラビリティーゾーン"
+}
