@@ -11,6 +11,8 @@ ENV_CONFIG=$(cat "$BASE_DIR/_terraform_config/env_variables/$ENV.json")
 
 cd $BASE_DIR/$TARGET_DIR
 
+echo "=========== $TARGET_DIR"
+
 if [[ ${TF_CMD} != 'init' ]]; then
   TF_VAR_primary_env=$(echo $ENV_CONFIG | jq -r ".primary_env") \
   TF_VAR_state_bucket=$(echo $ENV_CONFIG | jq -r ".state_bucket") \
