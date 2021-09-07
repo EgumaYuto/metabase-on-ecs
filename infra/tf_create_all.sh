@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -eu
+
 TF_CMD=$1
 ENV=$2
 TF_ARGS=${@:3}
