@@ -16,6 +16,45 @@ resource "aws_glue_catalog_database" "database" {
   name = module.naming.name
 }
 
+resource "aws_glue_catalog_table" "table" {
+  database_name = aws_glue_catalog_database.database.name
+  name          = "${module.naming.name}-source"
+
+  parameters = {
+    "classification" = "csv"
+  }
+
+  storage_descriptor {
+    location      = "s3://${aws_s3_bucket.source.bucket}/"
+    input_format  = "org.apache.hadoop.mapred.TextInputFormat"
+    output_format = "org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat"
+
+    ser_de_info {
+      name                  = module.naming.name
+      serialization_library = "org.apache.hadoop.hive.serde2.OpenCSVSerde"
+
+      parameters = {
+        "separatorChar" = ","
+      }
+    }
+
+    columns {
+      name = "Date"
+      type = "date"
+    }
+
+    columns {
+      name = "Prefecture"
+      type = "string"
+    }
+
+    columns {
+      name = "Newly confirmed cases"
+      type = "bigint"
+    }
+  }
+}
+
 resource "aws_security_group" "security_group" {
   name        = module.naming.name
   description = module.naming.name
