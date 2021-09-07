@@ -47,3 +47,13 @@ data "terraform_remote_state" "elb" {
     region = var.default_region
   }
 }
+
+data "terraform_remote_state" "rds_parameters" {
+  backend = "s3"
+
+  config = {
+    bucket = var.state_bucket
+    key    = "env:/${terraform.workspace}/state/platform/parameters/rds.tfstate"
+    region = var.default_region
+  }
+}

@@ -9,6 +9,17 @@ data "aws_iam_policy_document" "task_assume_policy" {
   }
 }
 
+data "aws_iam_policy_document" "task_policy" {
+  statement {
+    effect = "Allow"
+    actions = [
+      "ssm:GetParameters",
+      "kms:Decrypt"
+    ]
+    resources = ["*"] // TODO 絞る
+  }
+}
+
 resource "aws_iam_role" "execution_role" {
   name               = "${module.naming.name}-execution-role"
   assume_role_policy = data.aws_iam_policy_document.task_assume_policy.json
@@ -19,9 +30,23 @@ resource "aws_iam_role_policy_attachment" "execution_policy_attachment" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
 
+resource "aws_iam_role_policy_attachment" "execution_task_policy_attachment" {
+  role       = aws_iam_role.execution_role.name
+  policy_arn = aws_iam_policy.task_policy.arn
+}
+
 resource "aws_iam_role" "task_role" {
   name               = "${module.naming.name}-task-role"
   assume_role_policy = data.aws_iam_policy_document.task_assume_policy.json
+}
+
+resource "aws_iam_policy" "task_policy" {
+  policy = data.aws_iam_policy_document.task_policy.json
+}
+
+resource "aws_iam_role_policy_attachment" "task_policy_attachment" {
+  role       = aws_iam_role.task_role.name
+  policy_arn = aws_iam_policy.task_policy.arn
 }
 
 resource "aws_ecs_task_definition" "definition" {
@@ -66,10 +91,6 @@ resource "aws_ecs_task_definition" "definition" {
         "value": "${local.rds_endpoint}"
       },
       {
-        "name": "MB_DB_PASS",
-        "value": "SuperSecr3t"
-      },
-      {
         "name": "MB_DB_PORT",
         "value": "5432"
       },
@@ -80,6 +101,12 @@ resource "aws_ecs_task_definition" "definition" {
       {
         "name": "MB_DB_USER",
         "value": "metabase"
+      }
+    ],
+    "secrets": [
+      {
+        "name": "MB_DB_PASS",
+        "valueFrom": "${local.rds_password_arn}"
       }
     ],
     "portMappings": [
