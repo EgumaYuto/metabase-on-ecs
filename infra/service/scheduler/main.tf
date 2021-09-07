@@ -21,7 +21,7 @@ resource "aws_security_group" "security_group" {
   description = module.naming.name
   vpc_id      = local.vpc_id
 
-  ingress {
+  ingress { // TODO ザルすぎるので絞る
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
